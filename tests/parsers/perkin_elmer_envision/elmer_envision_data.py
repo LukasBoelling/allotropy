@@ -34,7 +34,6 @@ from allotropy.parsers.perkin_elmer_envision.elmer_envision_structure import (
     Result,
     SoftwareInfo,
 )
-from allotropy.constants import ASM_CONVERTER_NAME, ASM_CONVERTER_VERSION
 
 
 def get_data() -> Data:

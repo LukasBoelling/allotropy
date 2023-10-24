@@ -1,13 +1,10 @@
 import pytest
-from io import StringIO
-from pathlib import Path
 
 from allotropy.parser_factory import Vendor
 from allotropy.parsers.perkin_elmer_envision.elmer_envision_parser import (
     ElmerEnvisionParser,
 )
 from allotropy.parsers.utils.timestamp_parser import TimestampParser
-from allotropy.to_allotrope import allotrope_from_io
 from tests.parsers.perkin_elmer_envision.elmer_envision_data import get_data, get_model
 from tests.parsers.test_utils import from_file, validate_contents, validate_schema
 

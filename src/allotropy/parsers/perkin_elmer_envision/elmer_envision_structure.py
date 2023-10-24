@@ -409,11 +409,14 @@ class SoftwareInfo:
     @staticmethod
     def create(reader: CsvReader) -> SoftwareInfo:
         # Software version is a string of digits separated by dots
-        software_info_pattern = r"^Exported with (.+) version ((\d+\.)+\d+)"
+        software_info_pattern = r"^Exported with (.+) version ([\d\.]+)"
         if reader.drop_until(software_info_pattern) is None:
             return SoftwareInfo(name=None, version=None)
 
         software_info_raw = reader.pop()
+        if software_info_raw is None:
+            return SoftwareInfo(name=None, version=None)
+
         search_result = search(software_info_pattern, software_info_raw)
         if not search_result:
             return SoftwareInfo(name=None, version=None)
