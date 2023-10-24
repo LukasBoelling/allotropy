@@ -386,6 +386,7 @@ class Data:
     plate_maps: dict[str, PlateMap]
     labels: Labels
     instrument: Instrument
+    software_info: SoftwareInfo
 
     @staticmethod
     def create(reader: CsvReader) -> Data:
@@ -396,4 +397,28 @@ class Data:
             plate_maps=create_plate_maps(reader),
             labels=Labels.create(reader),
             instrument=Instrument.create(reader),
+            software_info=SoftwareInfo.create(reader),
         )
+
+
+@dataclass
+class SoftwareInfo:
+    name: Optional[str]
+    version: Optional[str]
+
+    @staticmethod
+    def create(reader: CsvReader) -> SoftwareInfo:
+        # Software version is a string of digits separated by dots
+        software_info_pattern = r"^Exported with (.+) version ((\d+\.)+\d+)"
+        if reader.drop_until(software_info_pattern) is None:
+            return SoftwareInfo(name=None, version=None)
+
+        software_info_raw = reader.pop()
+        search_result = search(software_info_pattern, software_info_raw)
+        if not search_result:
+            return SoftwareInfo(name=None, version=None)
+
+        name = search_result.group(1)
+        version = search_result.group(2)
+
+        return SoftwareInfo(name=name, version=version)

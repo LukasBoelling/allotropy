@@ -51,15 +51,16 @@ class ElmerEnvisionParser(VendorParser):
             raise Exception(msg)
 
         return Model(
+            data_system_document=DataSystemDocument(
+                file_name=filename,
+                software_name=data.software_info.name,
+                software_version=data.software_info.version,
+                ASM_converter_name=ASM_CONVERTER_NAME,
+                ASM_converter_version=ASM_CONVERTER_VERSION,
+            ),
             device_system_document=DeviceSystemDocument(
                 model_number=data.instrument.serial_number,
                 device_identifier=data.instrument.nickname,
-            ),
-            data_system_document=DataSystemDocument(
-                file_name=filename,
-                software_name="placeholder",
-                ASM_converter_name=ASM_CONVERTER_NAME,
-                ASM_converter_version=ASM_CONVERTER_VERSION,
             ),
             measurement_aggregate_document=MeasurementAggregateDocument(
                 measurement_identifier=str(uuid.uuid4()),

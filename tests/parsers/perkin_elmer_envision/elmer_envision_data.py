@@ -32,7 +32,9 @@ from allotropy.parsers.perkin_elmer_envision.elmer_envision_structure import (
     PlateInfo,
     PlateMap,
     Result,
+    SoftwareInfo,
 )
+from allotropy.constants import ASM_CONVERTER_NAME, ASM_CONVERTER_VERSION
 
 
 def get_data() -> Data:
@@ -87,16 +89,21 @@ def get_data() -> Data:
             serial_number="1050209",
             nickname="EnVision",
         ),
+        software_info=SoftwareInfo(
+            name="EnVision Workstation",
+            version="1.13.3009.1409",
+        ),
     )
 
 
 def get_model(file_name: str) -> Model:
     return Model(
         data_system_document=DataSystemDocument(
+            file_name=file_name,
             ASM_converter_name=ASM_CONVERTER_NAME,
             ASM_converter_version=ASM_CONVERTER_VERSION,
-            file_name=file_name,
-            software_name="placeholder",
+            software_name="EnVision Workstation",
+            software_version="1.13.3009.1409",
         ),
         device_system_document=DeviceSystemDocument(
             device_identifier="EnVision", model_number="1050209"

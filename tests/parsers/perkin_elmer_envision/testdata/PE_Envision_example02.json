@@ -1,7 +1,8 @@
 {
     "data system document": {
         "file name": "PE_Envision_example02.csv",
-        "software name": "placeholder",
+        "software name": "EnVision Workstation",
+        "software version": "1.13.3009.1409",
         "ASM converter name": "allotropy",
         "ASM converter version": "0.1.6"
     },
